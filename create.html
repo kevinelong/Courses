@@ -1,0 +1,21 @@
+<script>
+    //immediately create a new course
+    let course = {
+        courseNum: 1313,
+        courseName: "Intro to underwater basket weaving",
+        instructor: "Kevin Long",
+        startDate: "Sept 13",
+        numDays: 3,
+        dept: "Aquatic"
+    };
+
+    fetch("http://localhost:8081/api/courses", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(course)
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+
+
+</script>
