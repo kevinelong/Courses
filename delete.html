@@ -1,0 +1,11 @@
+<body>
+    <a href="index.html">Pick Course</a>
+    <div id="results"></div>
+</body>
+<script>
+    let id = (new URL(document.location)).searchParams.get('courseid');
+    document.getElementById("results").innerHTML = `
+        Deleting ID ${id} ...
+    `;
+
+</script>

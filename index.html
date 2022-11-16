@@ -1,10 +1,13 @@
 <body>
+    <a href="create.html"> Create New Course </a>
+
     <table id="userTable" border="1">
         <thead>
             <tr>
+                <th>Name</th>
+                <th>Number</th>
                 <th>Department</th>
-                <th>Course Number</th>
-                <th>Title</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody id="tBody"></tbody>
@@ -16,13 +19,15 @@
             <tr>
                 <td>
                     <a href="details.html?courseid=${course.id}">
-                        ${course.dept}
+                        ${course.courseName}
                     </a>
                 </td><td>
                     ${course.courseNum}
                 </td><td>
-                    ${course.courseName}
+                    ${course.dept}
                 </td>
+                <td>
+                    <a href="delete.html?courseid=${course.id}"> Delete </a>
             </tr>
         `;
     }
