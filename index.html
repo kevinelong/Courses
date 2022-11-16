@@ -1,0 +1,32 @@
+<body>
+    <table id="userTable" border="1">
+        <thead>
+            <tr>
+                <th>Department</th>
+                <th>Course Number</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody id="tBody"></tbody>
+    </table>
+</body>
+<script>
+    function addRow(course) {
+        document.getElementById("tBody").innerHTML += `
+            <tr>
+                <td>
+                    <a href="details.html?courseid=${course.id}">
+                        ${course.dept}
+                    </a>
+                </td><td>
+                    ${course.courseNum}
+                </td><td>
+                    ${course.courseName}
+                </td>
+            </tr>
+        `;
+    }
+    fetch("http://localhost:8081/api/courses")
+        .then(response => response.json())
+        .then(courseList => courseList.forEach(addRow));
+</script>

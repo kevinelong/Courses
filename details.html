@@ -1,0 +1,15 @@
+<body>
+    <a href="index.html">Pick Course</a>
+    <div id="results"></div>
+</body>
+<script>
+    let id = (new URL(document.location)).searchParams.get('courseid');
+    fetch("http://localhost:8081/api/courses/" + id)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("results").innerHTML = `
+                Instructor: ${data.instructor} <br>
+                Start Date: ${data.startDate} <br>
+                Number of days: ${data.numDays}`;
+        });
+</script>

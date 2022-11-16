@@ -1,19 +1,35 @@
+<body>
+    <h1> NEW COURSE </h1>
+    <input id="courseNum" placeholder="courseNum" value="101"><br>
+    <input id="courseName" placeholder="courseName"><br>
+    <input id="instructor" placeholder="instructor" value="KevinL"><br>
+    <input id="startDate" placeholder="startDate" value="Jan 2nd 2023"><br>
+    <input id="numDays" placeholder="numDays" type="number" value="5"><br>
+    <input id="dept" placeholder="dept" value="CompSci"><br>
+    <button id="save"> SAVE </button>
+</body>
 <script>
-    //immediately create a new course
-    let course = {
-        courseNum: 1313,
-        courseName: "Intro to underwater basket weaving",
-        instructor: "Kevin Long",
-        startDate: "Sept 13",
-        numDays: 3,
-        dept: "Aquatic"
-    };
 
-    fetch("http://localhost:8081/api/courses", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(course)
-    })
-    .then((response) => response.json())
-    .then((data) => console.log(data));
+    document.getElementById("save").addEventListener("click", e => {
+        let course = {
+            courseNum: document.getElementById("courseNum").value,
+            courseName: document.getElementById("courseName").value,
+            instructor: document.getElementById("instructor").value,
+            startDate: document.getElementById("startDate").value,
+            numDays: document.getElementById("numDays").value,
+            dept: document.getElementById("dept").value
+        };
+
+        fetch("http://localhost:8081/api/courses", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(course)
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                self.location = "index.html"; //show list after save
+            });
+    }); //END CLICK EVENT
+
 </script>
