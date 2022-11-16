@@ -1,11 +1,28 @@
 <body>
-    <a href="index.html">Pick Course</a>
+    <h1>Are you sure you want to delete this course:</h1>
     <div id="results"></div>
+    <br>
+    <a href="index.html">Cancel</a>
+    &nbsp;
+    <button id="confirm"> Confirm Delete </button>
 </body>
 <script>
     let id = (new URL(document.location)).searchParams.get('courseid');
-    document.getElementById("results").innerHTML = `
-        Deleting ID ${id} ...
-    `;
-
+    const endpoint = "http://localhost:8081/api/courses/" + id;
+    //DISPLAY FOR CONFIRMATION //SPECIFY GET EVEN THOUGH IT IS THE DEFAULT METHOD
+    fetch(endpoint, { method: "GET" }) 
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("results").innerHTML = `
+            <b>${data.courseName}</b> <br>
+            Instructor: ${data.instructor} <br>
+                Start Date: ${data.startDate} <br>
+                Number of days: ${data.numDays}`;
+        });
+    //FINAL CONFIRMED DELETE
+    document.getElementById("confirm").addEventListener("click", e => {
+        fetch(endpoint, { method: "DELETE" }).then(
+            self.location = "index.html"
+        );
+    });
 </script>
